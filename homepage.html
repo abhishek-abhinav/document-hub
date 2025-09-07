@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocumentHub</title>
+    <link rel="icon" type="image/png" href="https://sdmntprwestus3.oaiusercontent.com/files/00000000-81f8-61fd-a416-0fe4de74c019/raw?se=2025-09-07T17%3A27%3A32Z&sp=r&sv=2024-08-04&sr=b&scid=2452d6ac-189e-5144-9c07-c5951f60db96&skoid=864daabb-d06a-46b3-a747-d35075313a83&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-09-07T13%3A34%3A20Z&ske=2025-09-08T13%3A34%3A20Z&sks=b&skv=2024-08-04&sig=LtI36YTZMXEQVMRqZIvsb3vy9mdChme6/r0lxECS1fY%3D">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0b0d19;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        .navbar {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 40px;
+            background: #0b0d19;
+            position: relative;
+            z-index: 100;
+            border-bottom: 2px solid #6c3ef8;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* .logo-icon {
+            background: #6b46ff;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        } */
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .beta-badge {
+            background: #333;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 6px;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #6b46ff;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown>a {
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 35px;
+            left: 0;
+            background: #1c1f2d;
+            min-width: 220px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 16px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .dropdown-content a:hover {
+            background: #6b46ff;
+        }
+
+        @media (min-width: 769px) {
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+        }
+
+        .contact-btn {
+            background: linear-gradient(90deg, #6b46ff, #9b59ff);
+            padding: 8px 18px;
+            border-radius: 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.3s;
+        }
+
+        .contact-btn:hover {
+            opacity: 0.8;
+        }
+
+        .contact-text {
+            display: inline;
+        }
+
+        @media (max-width: 768px) {
+            .contact-text {
+                display: none;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: #1c1f2d;
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                padding: 15px;
+                border-radius: 10px;
+                width: 220px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .dropdown-content {
+                position: static;
+                background: #24273a;
+                box-shadow: none;
+                border-radius: 6px;
+                margin-top: 8px;
+            }
+
+            .menu-toggle {
+                display: block;
+                color: white;
+            }
+        }
+
+        /* HERO */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 8%;
+            flex-wrap: wrap;
+            background: #0b0d19;
+        }
+
+        .hero-text {
+            flex: 1 1 400px;
+            max-width: 600px;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .hero-text h1 span {
+            color: #6c3ef8;
+        }
+
+        .hero-text p {
+            margin: 20px 0;
+            font-size: 1rem;
+            color: #bbb;
+        }
+
+        .btn-group {
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            margin-right: 12px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #6c3ef8;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #502ac7;
+        }
+
+        .btn-outline {
+            border: 2px solid #6c3ef8;
+            color: #6c3ef8;
+        }
+
+        .btn-outline:hover {
+            background: #6c3ef8;
+            color: #fff;
+        }
+
+        .hero-img {
+            flex: 1 1 300px;
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .hero-img img {
+            max-width: 100%;
+            width: 100%;
+            border-radius: 20px;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            margin: -30px -25px 0 0;
+        }
+
+        .hero-img img:hover {
+            transform: scale(1.08);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 5%;
+                text-align: center;
+            }
+            .hero img{
+                margin: 0;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-text p {
+                font-size: 0.95rem;
+            }
+
+            .btn-group {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .btn {
+                margin: 8px;
+            }
+        }
+
+        /* SERVICES SECTION */
+        .services {
+            text-align: center;
+            padding: 80px 10%;
+            background: #0b0d19;
+            margin-bottom: -15em;
+        }
+
+        .services h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .services p {
+            color: #aaa;
+            margin-bottom: 40px;
+        }
+
+        .service-boxes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .service-box {
+            background: #1c1f2d;
+            padding: 25px;
+            border-radius: 16px;
+            text-align: left;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+
+        .service-box:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(108, 62, 248, 0.4);
+            border-color: #6c3ef8;
+        }
+
+        .service-box h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-box ul {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+
+        .service-box ul li {
+            margin: 8px 0;
+            font-size: 0.95rem;
+            color: #bbb;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .service-box ul li::before {
+            content: "✔";
+            color: #6c3ef8;
+            font-size: 14px;
+        }
+
+        .service-box a {
+            color: #6c3ef8;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .service-box a:hover {
+            color: #9b59ff;
+        }
+
+        /* EXPLORE SECTION */
+        .explore {
+            padding: 100px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .explore img {
+            max-width: 50%;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 15%;
+        }
+
+        .explore img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+        }
+
+        .explore-content {
+            flex: 1 1 400px;
+            max-width: 600px;
+            color: #fff;
+            margin-top: 15%;
+
+        }
+
+        .explore-content p {
+            margin-bottom: 20px;
+        }
+
+        .explore-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .explore-feature {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .explore-feature::before {
+            content: "✔";
+            color: #6c3ef8;
+            font-weight: bold;
+        }
+
+        .explore-btn {
+            display: inline-block;
+            background: #6c3ef8;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .explore-btn:hover {
+            background: #502ac7;
+        }
+
+        @media (max-width: 768px) {
+            .explore img{
+                max-width: 100%;
+                margin-top: 200px;
+                margin-bottom: -200px;
+                padding: 0;
+            }
+        }
+
+        @keyframes popUp {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .pop-box {
+            animation: popUp 0.8s ease forwards;
+        }
+
+        .pop-delay {
+            animation-delay: 0.3s;
+        }
+
+        /* Responsive Layout */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .left,
+        .right {
+            flex: 1 1 500px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="navbar">
+        <div class="logo">
+            <div class="logo-icon"
+         style="width:40px; height:40px; border-radius:50%; overflow:hidden; display:flex; align-items:center; justify-content:center; background:#fff; box-shadow:0 2px 6px rgba(0,0,0,0.15);">
+        <img src="https://sdmntprwestus3.oaiusercontent.com/files/00000000-81f8-61fd-a416-0fe4de74c019/raw?se=2025-09-07T17%3A27%3A32Z&sp=r&sv=2024-08-04&sr=b&scid=2452d6ac-189e-5144-9c07-c5951f60db96&skoid=864daabb-d06a-46b3-a747-d35075313a83&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-09-07T13%3A34%3A20Z&ske=2025-09-08T13%3A34%3A20Z&sks=b&skv=2024-08-04&sig=LtI36YTZMXEQVMRqZIvsb3vy9mdChme6/r0lxECS1fY%3D" alt="D" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+            <span class="logo-text">DocumentHub</span>
+            <span class="beta-badge">Beta</span>
+        </div>
+        <div class="nav-container">
+            <nav class="nav-links" id="navMenu">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <div class="dropdown">
+                    <a id="servicesToggle">Services ▼</a>
+                    <div class="dropdown-content" id="servicesMenu">
+                        <a href="#">Government ID Services</a>
+                        <a href="#">Certificates & Legal Documents</a>
+                        <a href="#">Loans & Financial Services</a>
+                    </div>
+                </div>
+                <a href="#">Agents</a>
+            </nav>
+            <a href="#" class="contact-btn">📞 <span class="contact-text">Contact Us</span></a>
+            <div class="menu-toggle" id="menuToggle">☰</div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>From <span>Aadhaar to Loans</span> <br>We Handle It All</h1>
+            <p>Your one-stop solution for all document services, making government and legal paperwork hassle-free.</p>
+            <div class="btn-group">
+                <a href="#" class="btn btn-primary">Explore Our Services</a>
+                <a href="#" class="btn btn-outline">Contact Us</a>
+            </div>
+        </div>
+        <div class="hero-img">
+            <img src="https://sdmntprnorthcentralus.oaiusercontent.com/files/00000000-8200-622f-b60a-614780f8c167/raw?se=2025-09-07T17%3A58%3A28Z&sp=r&sv=2024-08-04&sr=b&scid=e50c094f-5cc1-57f4-9534-217d4333e260&skoid=864daabb-d06a-46b3-a747-d35075313a83&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-09-07T12%3A12%3A21Z&ske=2025-09-08T12%3A12%3A21Z&sks=b&skv=2024-08-04&sig=NrtXsStY6KUO6OEQi/zDo4r/EF2sK%2BvTHxRCdaeAzdk%3D"
+                alt="Services">
+        </div>
+    </section>
+
+    <!-- OUR SERVICES -->
+    <section class="services">
+        <h2>Our Services</h2>
+        <p>We provide a comprehensive range of document services to make your life easier.</p>
+
+        <div class="service-boxes">
+            <!-- Box 1 -->
+            <div class="service-box">
+                <h3>🪪 Government ID & Citizen Services</h3>
+                <ul>
+                    <li>Aadhaar Card</li>
+                    <li>PAN Card</li>
+                    <li>Passport Services</li>
+                    <li>Voter ID</li>
+                    <li>Ayushman Bharat</li>
+                </ul>
+                <a href="#">Learn more →</a>
+            </div>
+
+            <!-- Box 2 -->
+            <div class="service-box">
+                <h3>📄 Certificates & Legal Documents</h3>
+                <ul>
+                    <li>Marriage Certificate</li>
+                    <li>Birth/Death Certificate</li>
+                    <li>Income Certificate</li>
+                    <li>Caste Certificate</li>
+                    <li>Domicile Certificate</li>
+                </ul>
+                <a href="#">Learn more →</a>
+            </div>
+
+            <!-- Box 3 -->
+            <div class="service-box">
+                <h3>🏦 Loans & Financial Services</h3>
+                <ul>
+                    <li>Personal Loans</li>
+                    <li>Business Loans</li>
+                    <li>Home Loans</li>
+                    <li>Insurance Services</li>
+                    <li>Bank Account Opening</li>
+                </ul>
+                <a href="#">Learn more →</a>
+            </div>
+        </div>
+    </section>
+    <div class="exco" style="background-image: linear-gradient(
+    #0b0d19 0%,
+  #9d7bff 25%,
+    #d0b6ff 50%,
+    #9d7bff 75%,
+    #0b0d19 100%);">
+        <!-- EXPLORE SECTION -->
+        <section class="explore">
+            <img src="https://images.unsplash.com/photo-1724302988170-84977bd1f03a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MzkyNDZ8MHwxfHNlYXJjaHwxfHxkb2N1bWVudCUyMHNvbHV0aW9uc3xlbnwwfHx8fDE3NTYwOTg2MjJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
+                alt="Document Solutions">
+                <div class="pop-box right"
+        style="flex:1 1 350px; min-width:300px; margin-top: 200px; padding:28px; border-radius:20px; backdrop-filter:blur(12px); background:rgba(155, 93, 229, 0.35);">
+        
+        <h2 style="text-align:center; color:#fff; text-shadow:0 1px 3px rgba(0,0,0,0.1);">
+            Explore Our Services
+        </h2>
+        <div class="explore-content" style="margin-top: 10px;">
+                
+                <p>
+                    With over 10 years of experience, we have been helping thousands of clients navigate through the
+                    complex world of documentation and government services. Our team of experts ensures that your
+                    paperwork is processed quickly and efficiently.
+                </p>
+                <p>
+                    We understand the importance of time and accuracy when it comes to documentation. That’s why we
+                    strive to provide reliable and prompt services to all our clients.
+                </p>
+                <div class="explore-features">
+                    <div class="explore-feature">Trusted Services</div>
+                    <div class="explore-feature">Expert Support</div>
+                    <div class="explore-feature">Quick Processing</div>
+                    <div class="explore-feature">Secure Handling</div>
+                </div>
+                <a href="#" class="explore-btn">Get Started</a>
+            </div>
+    </div>
+            
+        </section>
+
+        <script>
+            // Mobile menu toggle
+            const menuToggle = document.getElementById("menuToggle");
+            const navMenu = document.getElementById("navMenu");
+            menuToggle.addEventListener("click", () => {
+                navMenu.classList.toggle("active");
+            });
+
+            // Services dropdown toggle (mobile)
+            const servicesToggle = document.getElementById("servicesToggle");
+            const servicesMenu = document.getElementById("servicesMenu");
+            servicesToggle.addEventListener("click", (e) => {
+                e.preventDefault();
+                servicesMenu.style.display =
+                    servicesMenu.style.display === "block" ? "none" : "block";
+            });
+        </script>
+
+
+        <div
+            style="font-family:sans-serif; padding:10px; background:url('https://static.vecteezy.com/system/resources/previews/012/483/071/original/abstract-violet-and-purple-liquid-gradient-wave-decorative-background-smooth-flowing-layered-curved-waves-wallpaper-vector.jpg') center/cover no-repeat; min-height:90vh; display:flex; align-items:center; justify-content:center;">
+
+
+
+            <div class="container" 
+    style="display:flex; flex-wrap:wrap; gap:25px; justify-content:center; max-width:1200px; margin:30px 0 50px 0;">
+
+    <!-- Contact Form (Left) -->
+    <div class="pop-box left"
+        style="flex:1 1 350px; min-width:300px; padding:25px; border-radius:20px; backdrop-filter:blur(12px); background:rgba(255,255,255,0.7); box-shadow:0 8px 20px rgba(0,0,0,0.2); opacity:0;">
+        
+        <h2 style="text-align:center; margin-bottom:15px; color:#000; text-shadow:0 1px 3px rgba(0,0,0,0.1);">
+            Send Us a Message
+        </h2>
+        
+        <form style="display:flex; flex-direction:column; gap:15px;">
+            <label style="color:#000; font-size:14px;">Full Name</label>
+            <input type="text" placeholder="Your name" required
+                style="padding:12px; border:1px solid #ccc; border-radius:10px; outline:none; background:#fff; color:#000; transition:0.3s; width:100%;" 
+                onfocus="this.style.borderColor='#6c3ef8'" onblur="this.style.borderColor='#ccc'" />
+
+            <label style="color:#000; font-size:14px;">Email Address</label>
+            <input type="email" placeholder="Your email" required
+                style="padding:12px; border:1px solid #ccc; border-radius:10px; outline:none; background:#fff; color:#000; transition:0.3s; width:100%;" 
+                onfocus="this.style.borderColor='#6c3ef8'" onblur="this.style.borderColor='#ccc'" />
+
+            <label style="color:#000; font-size:14px;">Phone Number</label>
+            <input type="tel" placeholder="Your phone number" required
+                style="padding:12px; border:1px solid #ccc; border-radius:10px; outline:none; background:#fff; color:#000; transition:0.3s; width:100%;" 
+                onfocus="this.style.borderColor='#6c3ef8'" onblur="this.style.borderColor='#ccc'" />
+
+            <label style="color:#000; font-size:14px;">Service Required</label>
+            <select required
+                style="padding:12px; border:1px solid #ccc; border-radius:10px; outline:none; background:#fff; color:#000; font-weight:500; transition:0.3s; cursor:pointer; width:100%;"
+                onfocus="this.style.borderColor='#6c3ef8'" onblur="this.style.borderColor='#ccc'" 
+                onmouseover="this.style.boxShadow='0 4px 10px rgba(108,62,248,0.2)'" 
+                onmouseout="this.style.boxShadow='none'">
+                <option value="" disabled selected>Select a service</option>
+                <option>Government ID Services</option>
+                <option>Certificates & Legal Documents</option>
+                <option>Loans & Financial Services</option>
+                <option>Other Services</option>
+            </select>
+
+            <label style="color:#000; font-size:14px;">Your Message</label>
+            <textarea placeholder="How can we help you?" rows="4" required
+                style="padding:12px; border:1px solid #ccc; border-radius:10px; outline:none; background:#fff; color:#000; transition:0.3s; width:100%;" 
+                onfocus="this.style.borderColor='#6c3ef8'" onblur="this.style.borderColor='#ccc'"></textarea>
+
+            <button type="submit"
+                style="padding:12px; border:none; border-radius:10px; background:linear-gradient(135deg, #6c3ef8, #a67df8); color:white; font-weight:bold; cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition:0.3s;">
+                Send Message
+            </button>
+        </form>
+    </div>
+
+    <!-- Gallery Section (Right) -->
+    <div class="pop-box right"
+        style="flex:1 1 350px; min-width:300px; padding:25px; border-radius:20px; backdrop-filter:blur(12px); background:rgba(255,255,255,0.7); box-shadow:0 8px 20px rgba(0,0,0,0.2); opacity:0;">
+        
+        <h2 style="text-align:center; margin-bottom:15px; color:#000; text-shadow:0 1px 3px rgba(0,0,0,0.1);">
+            Our Office Gallery
+        </h2>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:15px;">
+            <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=500&q=60"
+                style="width:100%; border-radius:12px; object-fit:cover; box-shadow:0 4px 10px rgba(0,0,0,0.2);" alt="Gallery 1">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=500&q=60"
+                style="width:100%; border-radius:12px; object-fit:cover; box-shadow:0 4px 10px rgba(0,0,0,0.2);" alt="Gallery 2">
+            <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=500&q=60"
+                style="width:100%; border-radius:12px; object-fit:cover; box-shadow:0 4px 10px rgba(0,0,0,0.2);" alt="Gallery 3">
+            <img src="https://tse3.mm.bing.net/th/id/OIP.RiLhqFkZbfTZaiao7lYSSQHaE8?pid=Api&P=0&h=180"
+                style="width:100%; border-radius:12px; object-fit:cover; box-shadow:0 4px 10px rgba(0,0,0,0.2);" alt="Gallery 4">
+            <img src="https://tse3.mm.bing.net/th/id/OIP.qOEH2TGGRAXgGtwuWFYqNAHaE8?pid=Api&P=0&h=180"
+                style="width:100%; border-radius:12px; object-fit:cover; box-shadow:0 4px 10px rgba(0,0,0,0.2);" alt="Gallery 4">
+            <img src="https://tse4.mm.bing.net/th/id/OIP.Si7bSIxdLCDmjN83_LXbWwHaE6?pid=Api&P=0&h=180"
+                style="width:100%; border-radius:12px; object-fit:cover; box-shadow:0 4px 10px rgba(0,0,0,0.2);" alt="Gallery 4">
+        </div>
+    </div>
+</div></div>
+
+<div class="footer" style="margin:0; font-family:Arial, sans-serif; background:#111827; color:#e5e7eb;">
+
+  <!-- Footer -->
+  <footer style="background:#111827; color:#e5e7eb; padding:40px 40px;">
+    <div style="width:100%; margin:auto; display:flex; flex-wrap:wrap; justify-content:space-between;">
+
+      <!-- Left Section -->
+      <div style="flex:1; min-width:220px; margin-bottom:20px; max-width:300px;">
+        <div style="background:#e5e7eb; color:#374151; font-weight:bold; display:inline-block; padding:10px 20px; border-radius:2px;">
+          DocumentHub
+        </div>
+        <p style="margin-top:20px; line-height:1.6;">
+          Your one-stop solution for all document services, making government and legal paperwork hassle-free.
+        </p>
+        <div style="margin-top:20px; display:flex; gap:10px;">
+          <a href="#" style="background:#1f2937; padding:10px; border-radius:50%; display:inline-block;">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="20">
+          </a>
+          <a href="#" style="background:#1f2937; padding:10px; border-radius:50%; display:inline-block;">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" width="20">
+          </a>
+          <a href="#" style="background:#1f2937; padding:10px; border-radius:50%; display:inline-block;">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="20">
+          </a>
+          <a href="#" style="background:#1f2937; padding:10px; border-radius:50%; display:inline-block;">
+            <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn" width="20">
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div style="flex:1; min-width:180px; margin-bottom:20px; max-width:220px;">
+        <h3 style="font-weight:bold; margin-bottom:15px;">Quick Links</h3>
+        <p><a href="#" style="color:#e5e7eb; text-decoration:none;">Home</a></p>
+        <p><a href="#" style="color:#e5e7eb; text-decoration:none;">About Us</a></p>
+        <p><a href="#" style="color:#e5e7eb; text-decoration:none;">Services</a></p>
+        <p><a href="#" style="color:#e5e7eb; text-decoration:none;">Contact</a></p>
+        <p><a href="#" style="color:#e5e7eb; text-decoration:none;">Privacy Policy</a></p>
+        <p><a href="#" style="color:#e5e7eb; text-decoration:none;">Terms of Service</a></p>
+      </div>
+
+      <!-- Our Services -->
+      <div style="flex:1; min-width:220px; margin-bottom:20px; max-width:260px;">
+        <h3 style="font-weight:bold; margin-bottom:15px;">Our Services</h3>
+        <p>Government ID Services</p>
+        <p>Certificates & Legal Documents</p>
+        <p>Loans & Financial Services</p>
+        <p>Property Documentation</p>
+        <p>Tax Filing Services</p>
+        <p>Business Registration</p>
+      </div>
+
+      <!-- Contact Info -->
+      <div style="flex:1; min-width:250px; margin-bottom:20px; max-width:280px;">
+        <h3 style="font-weight:bold; margin-bottom:15px;">Contact Info</h3>
+        <p style="display:flex; align-items:center; margin:8px 0;">
+          📍 <span style="margin-left:10px;">123 Document Street, Service Lane<br>AHMEDABAD, 110001</span>
+        </p>
+        <p style="display:flex; align-items:center; margin:8px 0;">
+          📞 <span style="margin-left:10px;">+91 98765 43210</span>
+        </p>
+        <p style="display:flex; align-items:center; margin:8px 0;">
+          ✉️ <span style="margin-left:10px;">info@documenthub.com</span>
+        </p>
+        <p style="display:flex; align-items:center; margin:8px 0;">
+          ⏰ <span style="margin-left:10px;">Mon-Sat: 9:00 AM - 6:00 PM</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Bottom -->
+    <div style="border-top:1px solid rgba(255,255,255,0.1); text-align:center; padding-top:20px; margin-top:20px; font-size:14px; color:#9ca3af;">
+      © 2023 DocumentHub. All rights reserved.
+    </div>
+  </footer>
+
+</div>
+
+</body>
+
+</html>
