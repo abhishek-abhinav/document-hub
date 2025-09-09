@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Documents Required — Purple Hover Glow</title>
+  <style>
+    :root{
+      --purple-1:#a855f7;
+      --purple-2:#9333ea;
+      --muted:#d1d5db;
+    }
+
+    /* Full-page gradient background */
+    html,body{
+      height:100%;
+      margin:0;
+    }
+    body{
+      font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #0f0f1a 0%, #1a1033 35%, #302b63 70%, #4c1d95 100%);
+      background-attachment: fixed;
+      color:#fff;
+      padding:48px 20px;
+      box-sizing:border-box;
+      min-height:100vh;
+    }
+
+    .wrap {
+      max-width:1200px;
+      margin:0 auto;
+      padding:28px;
+    }
+
+    /* Heading */
+    .heading {
+      text-align:center;
+      margin-bottom:40px;
+    }
+    .heading h2{
+      margin:0;
+      font-size:32px;
+      font-weight:700;
+      color:#ffffff;
+      text-shadow: 0 3px 12px rgba(0,0,0,0.45);
+    }
+    .heading p{
+      margin:12px 0 0;
+      color:rgba(255,255,255,0.75);
+      font-size:15px;
+    }
+
+    /* Grid */
+    .cards-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:24px;
+      align-items:stretch;
+    }
+    @media (max-width:1024px){ .cards-grid{ grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:700px) { .cards-grid{ grid-template-columns:1fr; } .wrap{ padding:18px; } }
+
+    /* Card */
+    .card {
+      display:flex;
+      flex-direction:column;
+      min-height:360px;
+      background: transparent; /* same as body */
+      border-radius:14px;
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.55);
+      transition: transform .25s ease, box-shadow .25s ease, border .25s ease;
+    }
+    .card:hover{
+      transform: translateY(-6px);
+      border: 1px solid var(--purple-1); /* purple border on hover */
+      box-shadow: 0 14px 34px rgba(0,0,0,0.75),
+                  0 0 18px rgba(168,85,247,0.6);
+    }
+
+    /* Header */
+    .card-header{
+      padding:14px 16px;
+      font-size:17px;
+      font-weight:600;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      border-bottom: 1px solid var(--purple-1); /* slimmer purple divider */
+    }
+
+    .icon {
+      display:inline-flex;
+      width:34px;
+      height:34px;
+      align-items:center;
+      justify-content:center;
+      font-size:18px;
+      background: rgba(255,255,255,0.06);
+      border-radius:8px;
+    }
+
+    /* Body */
+    .card-body{
+      padding:18px 18px 12px;
+      flex:1 1 auto;
+      color: var(--muted);
+      font-size:15px;
+    }
+    .card-body ul{
+      margin:0;
+      padding-left:18px;
+      list-style:none;
+    }
+    .card-body li{
+      margin-bottom:10px;
+      position:relative;
+      padding-left:22px;
+      line-height:1.45;
+    }
+    .card-body li::before{
+      content: "✓";
+      position:absolute;
+      left:0;
+      top:0;
+      color: var(--purple-1);
+      font-weight:700;
+      font-size:14px;
+    }
+
+    /* Footer - button */
+    .card-footer{
+      padding:16px;
+      margin-top:auto;
+    }
+    .btn {
+      display:block;
+      width:100%;
+      max-width:260px;
+      margin:0 auto;
+      padding:10px 14px;
+      border-radius:10px;
+      text-align:center;
+      text-decoration:none;
+      color:#fff;
+      font-weight:600;
+      background: linear-gradient(90deg,var(--purple-2),var(--purple-1));
+      box-shadow: 0 6px 18px rgba(121,46,206,0.2);
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s;
+    }
+    .btn:hover{
+      transform: translateY(-3px);
+      filter:brightness(1.05);
+      box-shadow: 0 12px 28px rgba(121,46,206,0.35);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="heading">
+      <h2>Documents Required for Each Service</h2>
+      <p>Choose a service to view the required documents and apply quickly.</p>
+    </div>
+
+    <div class="cards-grid">
+
+      <!-- 1 -->
+      <article class="card">
+        <header class="card-header"><span class="icon">💍</span>Marriage Certificate</header>
+        <div class="card-body">
+          <ul>
+            <li>Aadhar Card, Election Card (Both)</li>
+            <li>School Certificate / Birth Certificate</li>
+            <li>Lagra Kankotri (Both), Pandit ID Proof</li>
+            <li>Bride & Groom Joint Photo (4x6)</li>
+            <li>Passport Size Photos</li>
+            <li>ID Proof of Two Witnesses</li>
+          </ul>
+        </div>
+        <div class="card-footer"><a class="btn" href="/marriagecertificate/">Apply Now</a></div>
+      </article>
+
+      <!-- 2 -->
+      <article class="card">
+        <header class="card-header"><span class="icon">🍱</span>Food Licence (FSSAI)</header>
+        <div class="card-body">
+          <ul>
+            <li>Aadhaar Card, PAN Card</li>
+            <li>Full Name and Address</li>
+            <li>Cancelled Cheque</li>
+            <li>Light Bill, Tax Bill, Rental Agreement</li>
+            <li>Passport Size Photo (1)</li>
+            <li>Email ID, Mobile Number</li>
+          </ul>
+        </div>
+        <div class="card-footer"><a class="btn" href="/foodlicence/">Apply Now</a></div>
+      </article>
+
+      <!-- 3 -->
+      <article class="card">
+        <header class="card-header"><span class="icon">🧾</span>Ration Card</header>
+        <div class="card-body">
+          <ul>
+            <li>Election Card</li>
+            <li>All Members’ Aadhaar Card</li>
+            <li>Light Bill</li>
+            <li>Child Birth Certificate (if under 5 years)</li>
+            <li>Photos (2)</li>
+          </ul>
+        </div>
+        <div class="card-footer"><a class="btn" href="/rationcard/">Apply Now</a></div>
+      </article>
+
+      <!-- 4 -->
+      <article class="card">
+        <header class="card-header"><span class="icon">🏛️</span>Caste Certificate</header>
+        <div class="card-body">
+          <ul>
+            <li>Proof of Identity (Aadhaar, Voter ID)</li>
+            <li>Proof of Residence (Ration, Electricity Bill)</li>
+            <li>Birth Certificate</li>
+            <li>Family Caste Documents</li>
+          </ul>
+        </div>
+        <div class="card-footer"><a class="btn" href="/castecertificate/">Apply Now</a></div>
+      </article>
+
+      <!-- 5 -->
+      <article class="card">
+        <header class="card-header"><span class="icon">📑</span>Income Certificate</header>
+        <div class="card-body">
+          <ul>
+            <li>Aadhaar Card (Mandatory)</li>
+            <li>Election Card (Mandatory)</li>
+            <li>Ration Card (Mandatory)</li>
+            <li>Light Bill (Mandatory)</li>
+            <li>2 Witness Aadhaar + PAN</li>
+          </ul>
+        </div>
+        <div class="card-footer"><a class="btn" href="/incomecertificates/">Apply Now</a></div>
+      </article>
+
+      <!-- 6 -->
+      <article class="card">
+        <header class="card-header"><span class="icon">👶</span>Birth Certificate</header>
+        <div class="card-body">
+          <ul>
+            <li>Hospital Discharge Papers</li>
+            <li>Parents’ Aadhaar Cards</li>
+            <li>Address Proof</li>
+            <li>Application Form</li>
+          </ul>
+        </div>
+        <div class="card-footer"><a class="btn" href="/birthcertificates/">Apply Now</a></div>
+      </article>
+
+    </div>
+  </div>
+</body>
+</html>
